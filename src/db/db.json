@@ -1,0 +1,419 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "john_doedasdsad",
+      "email": "john_doe@example.com",
+      "password": "pass123john",
+      "avatar": "https://randomuser.me/api/portraits/men/1.jpg",
+      "role": "user",
+      "createdAt": "2025-06-01T10:00:00Z"
+    },
+    {
+      "id": "2",
+      "username": "jane_smith",
+      "email": "jane_smith@example.com",
+      "password": "pass123jane",
+      "avatar": "https://randomuser.me/api/portraits/women/2.jpg",
+      "role": "user",
+      "createdAt": "2025-06-01T11:00:00Z"
+    },
+    {
+      "id": "3",
+      "username": "admin_mike",
+      "email": "admin_mike@example.com",
+      "password": "pass123mike",
+      "avatar": "https://randomuser.me/api/portraits/men/3.jpg",
+      "role": "admin",
+      "createdAt": "2025-06-01T09:00:00Z"
+    },
+    {
+      "id": "5",
+      "username": "tom_hardy",
+      "email": "tom_hardy@example.com",
+      "password": "pass123tom",
+      "avatar": "https://randomuser.me/api/portraits/men/5.jpg",
+      "role": "user",
+      "createdAt": "2025-06-02T14:00:00Z"
+    },
+    {
+      "id": "6",
+      "username": "emma_watson",
+      "email": "emma_watson@example.com",
+      "password": "pass123emma",
+      "avatar": "https://randomuser.me/api/portraits/women/6.jpg",
+      "role": "user",
+      "createdAt": "2025-06-03T08:00:00Z"
+    },
+    {
+      "id": "7",
+      "username": "admin_claire",
+      "email": "admin_claire@example.com",
+      "password": "pass123claire",
+      "avatar": "https://randomuser.me/api/portraits/women/7.jpg",
+      "role": "admin",
+      "createdAt": "2025-06-03T09:00:00Z"
+    },
+    {
+      "id": "8",
+      "username": "david_beckham",
+      "email": "david_beckham@example.com",
+      "password": "pass123david",
+      "avatar": "https://randomuser.me/api/portraits/men/8.jpg",
+      "role": "user",
+      "createdAt": "2025-06-04T10:00:00Z"
+    },
+    {
+      "id": "d5ace2f0-6d9c-4270-ba53-5588eb054e8d",
+      "username": "lol",
+      "email": "admin@gmail.com",
+      "password": "213123123",
+      "role": "user",
+      "avatar": [
+        "blob:http://localhost:5173/c50cbf33-37fe-4976-9437-17d17cef652e",
+        {}
+      ]
+    },
+    {
+      "id": "34f5d6b3-1e72-4105-a92a-d779f4b662bd",
+      "username": "lolazo",
+      "email": "alexismarechal@upb.edu",
+      "password": "dasdasdasdsad",
+      "role": "user"
+    },
+    {
+      "id": "cbf193fb-3780-4d28-8050-24535918cb77",
+      "username": "lolilazds",
+      "email": "john_doe@example.com",
+      "password": "dasdasdasdasd",
+      "role": "user",
+      "token": ""
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "title": "Reloj Rolex Vintage",
+      "description": "Elegante reloj Rolex Oyster Perpetual de los años 70, en excelente estado de conservación. Un clásico para coleccionistas y amantes de la alta relojería.",
+      "image": "https://www.swisswatchexpo.com/images/custom-catalog-content/header/rolex-mens-vintage.jpg",
+      "basePrice": 5000,
+      "currentPrice": 2112125,
+      "duration": 13000,
+      "startTime": "2025-06-30T11:00:00Z",
+      "endTime": "2025-07-01T11:00:00Z",
+      "status": "past",
+      "winnerId": "1"
+    },
+    {
+      "id": "2",
+      "title": "Vinilo Autografiado de The Beatles",
+      "description": "Vinilo original de 1965 firmado por los cuatro miembros de The Beatles. Una joya musical para fanáticos y coleccionistas.",
+      "image": "https://c.files.bbci.co.uk/00e7/live/8c4e26c0-9247-11ef-841b-8555c5ec280f.jpg",
+      "basePrice": 2000,
+      "currentPrice": 2500,
+      "duration": 86400,
+      "startTime": "2025-06-27T22:00:00Z",
+      "endTime": "2025-06-28T00:00:00Z",
+      "status": "past",
+      "winnerId": 2
+    },
+    {
+      "id": "3",
+      "title": "Mesa Antigua de Roble",
+      "description": "Mesa de comedor de roble macizo del siglo XIX, con detalles tallados a mano. Ideal para decorar espacios clásicos o como pieza de colección.",
+      "image": "https://www.penderynantiques.co.uk/app/uploads/2023/01/M-3300-Early-20th-Century-Antique-Oak-Extendable-Dining-Table-1.jpg",
+      "basePrice": 1500,
+      "currentPrice": 1223333,
+      "duration": 45555,
+      "startTime": "2025-06-30T10:00:00Z",
+      "endTime": "2025-07-01T10:00:00Z",
+      "status": "active",
+      "winnerId": "1"
+    },
+    {
+      "id": "4",
+      "title": "Laptop Gamer",
+      "description": "Portátil de alto rendimiento para gaming, equipada con tarjeta gráfica RTX 3080 y 32GB de RAM. Diseñada para juegos exigentes y tareas pesadas.",
+      "image": "https://m.media-amazon.com/images/I/71kOH3in8TL.jpg",
+      "basePrice": 1200,
+      "currentPrice": 1200,
+      "duration": 86400,
+      "startTime": "2025-06-28T04:00:00Z",
+      "endTime": "2025-06-28T06:00:00Z",
+      "status": "upcoming",
+      "winnerId": null
+    },
+    {
+      "id": "6",
+      "title": "Collar de Diamantes",
+      "description": "Collar de oro de 18 quilates con un colgante de diamante de 2 quilates. Elegancia y lujo en una sola pieza.",
+      "image": "https://image.makewebcdn.com/makeweb/m_1920x0/pNb0ifw4M/AProducts/LNN851__1.jpg",
+      "basePrice": 3000,
+      "currentPrice": 3000,
+      "duration": 86400,
+      "startTime": "2025-06-28T05:00:00Z",
+      "endTime": "2025-06-28T08:00:00Z",
+      "status": "upcoming",
+      "winnerId": null
+    },
+    {
+      "id": "7",
+      "title": "Guitarra Eléctrica Fender",
+      "description": "Guitarra eléctrica Fender Stratocaster con acabado personalizado y excelente calidad de sonido. Uso ligero, ideal para músicos exigentes.",
+      "image": "https://t3.ftcdn.net/jpg/02/16/35/78/360_F_216357832_E67FUQu5RRRCe9pUb1uefbJJSBK0Wiza.jpg",
+      "basePrice": 800,
+      "currentPrice": 900,
+      "duration": 100000,
+      "startTime": "2025-06-30T10:00:00Z",
+      "endTime": "2025-07-01T10:00:00Z",
+      "status": "active",
+      "winnerId": null
+    },
+    {
+      "id": "8",
+      "title": "Colección de Monedas Raras",
+      "description": "Selección exclusiva de monedas europeas del siglo XIX. Una oportunidad única para numismáticos y coleccionistas.",
+      "image": "https://media.cnn.com/api/v1/images/stellar/prod/untitled-1-coin-20240918032128495.jpg?q=w_1110,c_fill",
+      "basePrice": 1000,
+      "currentPrice": 1000,
+      "duration": 86400,
+      "startTime": "2025-06-28T06:00:00Z",
+      "endTime": "2025-06-28T08:00:00Z",
+      "status": "upcoming",
+      "winnerId": null
+    },
+    {
+      "id": "9",
+      "title": "Obra de Arte Contemporáneo",
+      "description": "Pintura original de autor emergente, mezcla de técnicas modernas y arte abstracto. Pieza única para galerías o coleccionistas.",
+      "image": "https://example.com/arte.jpg",
+      "basePrice": 1000,
+      "currentPrice": 1100,
+      "duration": 86400,
+      "startTime": "2025-06-29T14:15:00Z",
+      "endTime": "2025-06-30T14:25:00Z",
+      "status": "active",
+      "winnerId": null
+    }
+  ],
+  "bids": [
+    {
+      "id": "4",
+      "productId": 2,
+      "userId": 2,
+      "amount": 2100,
+      "timestamp": "2025-06-27T22:20:00Z"
+    },
+    {
+      "id": "5",
+      "productId": 2,
+      "userId": 4,
+      "amount": 2200,
+      "timestamp": "2025-06-27T22:30:00Z"
+    },
+    {
+      "id": "6",
+      "productId": 2,
+      "userId": 2,
+      "amount": 2500,
+      "timestamp": "2025-06-27T23:50:00Z"
+    },
+    {
+      "id": "7",
+      "productId": 5,
+      "userId": 4,
+      "amount": 320,
+      "timestamp": "2025-06-27T20:15:00Z"
+    },
+    {
+      "id": "8",
+      "productId": 5,
+      "userId": 6,
+      "amount": 330,
+      "timestamp": "2025-06-27T20:20:00Z"
+    },
+    {
+      "id": "9",
+      "productId": 5,
+      "userId": 4,
+      "amount": 350,
+      "timestamp": "2025-06-27T20:50:00Z"
+    },
+    {
+      "id": "10",
+      "productId": 7,
+      "userId": 5,
+      "amount": 850,
+      "timestamp": "2025-06-28T01:40:00Z"
+    },
+    {
+      "id": "11",
+      "productId": 7,
+      "userId": 6,
+      "amount": 900,
+      "timestamp": "2025-06-28T01:45:00Z"
+    },
+    {
+      "id": "de3a",
+      "productId": "1",
+      "userId": "1",
+      "bid": 5005,
+      "timestamp": "2025-06-29T22:02:48.083Z"
+    },
+    {
+      "id": "c31b",
+      "productId": "1",
+      "userId": "1",
+      "bid": 5006,
+      "timestamp": "2025-06-29T22:51:04.514Z"
+    },
+    {
+      "id": "52a9",
+      "productId": "1",
+      "userId": "1",
+      "bid": 211212,
+      "timestamp": "2025-06-30T14:35:49.068Z"
+    },
+    {
+      "id": "3d05",
+      "productId": "1",
+      "userId": "1",
+      "bid": 211212,
+      "timestamp": "2025-06-30T14:35:49.110Z"
+    },
+    {
+      "id": "7523",
+      "productId": "1",
+      "userId": "1",
+      "bid": 2112122,
+      "timestamp": "2025-06-30T14:35:51.082Z"
+    },
+    {
+      "id": "30e2",
+      "productId": "1",
+      "userId": "1",
+      "bid": 2112122,
+      "timestamp": "2025-06-30T14:35:51.118Z"
+    },
+    {
+      "id": "62f2",
+      "productId": "1",
+      "userId": "1",
+      "bid": 2112123,
+      "timestamp": "2025-06-30T14:35:53.051Z"
+    },
+    {
+      "id": "e1ee",
+      "productId": "1",
+      "userId": "1",
+      "bid": 2112123,
+      "timestamp": "2025-06-30T14:35:53.089Z"
+    },
+    {
+      "id": "0549",
+      "productId": "1",
+      "userId": "1",
+      "bid": 2112124,
+      "timestamp": "2025-06-30T14:35:54.872Z"
+    },
+    {
+      "id": "d3ea",
+      "productId": "1",
+      "userId": "1",
+      "bid": 2112124,
+      "timestamp": "2025-06-30T14:35:54.907Z"
+    },
+    {
+      "id": "cc0a",
+      "productId": "1",
+      "userId": "1",
+      "bid": 2112125,
+      "timestamp": "2025-06-30T14:35:56.479Z"
+    },
+    {
+      "id": "58a4",
+      "productId": "1",
+      "userId": "1",
+      "bid": 2112125,
+      "timestamp": "2025-06-30T14:35:56.585Z"
+    },
+    {
+      "id": "4bfa",
+      "productId": "3",
+      "userId": "1",
+      "bid": 231213,
+      "timestamp": "2025-06-30T16:11:16.734Z"
+    },
+    {
+      "id": "7632",
+      "productId": "3",
+      "userId": "1",
+      "bid": 231213,
+      "timestamp": "2025-06-30T16:11:16.756Z"
+    },
+    {
+      "id": "6767",
+      "productId": "3",
+      "userId": "1",
+      "bid": 1223333,
+      "timestamp": "2025-06-30T16:11:29.253Z"
+    },
+    {
+      "id": "bf04",
+      "productId": "3",
+      "userId": "1",
+      "bid": 1223333,
+      "timestamp": "2025-06-30T16:11:29.266Z"
+    }
+  ],
+  "chatMessages": [
+    {
+      "id": "1",
+      "productId": 1,
+      "userId": 1,
+      "username": "john_doe",
+      "message": "Wow, this Rolex is amazing!",
+      "timestamp": "2025-06-28T00:05:00Z"
+    },
+    {
+      "id": "2",
+      "productId": 1,
+      "userId": 2,
+      "username": "jane_smith",
+      "message": "I'm definitely bidding on this one!",
+      "timestamp": "2025-06-28T00:07:00Z"
+    },
+    {
+      "id": "3",
+      "productId": 2,
+      "userId": 2,
+      "username": "jane_smith",
+      "message": "This vinyl is a must-have!",
+      "timestamp": "2025-06-27T22:10:00Z"
+    },
+    {
+      "id": "4",
+      "productId": 2,
+      "userId": 4,
+      "username": "sarah_connor",
+      "message": "Good luck everyone!",
+      "timestamp": "2025-06-27T22:15:00Z"
+    },
+    {
+      "id": "5",
+      "productId": 5,
+      "username": "tom_hardy",
+      "userId": 5,
+      "message": "This typewriter is so cool!",
+      "timestamp": "2025-06-27T20:10:00Z"
+    },
+    {
+      "id": "6",
+      "productId": 7,
+      "userId": 6,
+      "username": "emma_watson",
+      "message": "Love the paint job on this guitar!",
+      "timestamp": "2025-06-28T01:35:00Z"
+    }
+  ]
+}
