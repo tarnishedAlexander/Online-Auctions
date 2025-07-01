@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import type { User } from "../interfaces/userInterface";
 
 interface BidFormProps {
   productId: string;
@@ -14,6 +15,8 @@ interface BidFormProps {
   setBids: React.Dispatch<
     React.SetStateAction<{ userId: string; bid: number; timestamp: string }[]>
   >;
+  getUserName: (userId: string) => string;
+  user: User;
 }
 
 function BidForm({
@@ -22,12 +25,14 @@ function BidForm({
   setAlertMessage,
   setAlertSeverity,
   setAlertOpen,
-  setBids,
+  getUserName,
+  user,
 }: BidFormProps) {
+  console.log("BidForm rendered with user:", getUserName(user.id));
   const formik = useFormik({
     initialValues: {
       bid: "",
-      userId: "1", // Placeholder; replace with actual user authentication
+      userId: user.id,
     },
     validate: (values) => {
       const schema = Yup.object({
@@ -38,7 +43,6 @@ function BidForm({
             `La puja debe ser al menos $${currentPrice.toFixed(2)}`
           )
           .positive("La puja no puede ser negativa")
-          .max(10000000, "La puja no puede exceder $10,000,000")
           .typeError("La puja debe ser un número"),
       });
       try {
@@ -70,18 +74,16 @@ function BidForm({
           if (response.ok) {
             setAlertMessage("¡Se subió tu monto correctamente!");
             setAlertSeverity("success");
-            const newBid = {
-              productId,
-              userId: values.userId,
-              bid: Number(values.bid),
-              timestamp: new Date().toISOString(),
-            };
             await fetch(`http://localhost:3000/bids`, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(newBid),
+              body: JSON.stringify({
+                productId,
+                userId: values.userId,
+                bid: Number(values.bid),
+                timestamp: new Date().toISOString(),
+              }),
             });
-            setBids((prevBids) => [...prevBids, newBid]);
           } else {
             setAlertMessage(result.error || "Error al subir la puja.");
             setAlertSeverity("error");

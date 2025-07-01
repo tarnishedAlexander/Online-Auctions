@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useMemo } from "react";
 import { useProducts } from "../hooks/useProducts";
 import ProductHeader from "../components/ProductHeader";
 import ProductFormDialog from "../components/ProductFormDialog";
@@ -12,6 +12,7 @@ import {
   CircularProgress,
   Divider,
 } from "@mui/material";
+import { useUser } from "../contexts/UserContextHelper";
 
 function HomePage() {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -21,7 +22,9 @@ function HomePage() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [value, setValue] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const isAdmin = true;
+  const { user } = useUser();
+  const isAdmin = user?.role === "admin";
+  console.log("isAdmin", isAdmin, "user", user);
 
   const {
     products,
@@ -88,14 +91,23 @@ function HomePage() {
     fileInputRef.current?.click();
   }, []);
 
-  // Filter products based on tab value
-  const currentAuctions = products.filter(
-    (product) => product.status === "active"
+  const handleGoToProduct = useCallback(
+    (productId: string) => {
+      goToProduct(productId);
+    },
+    [goToProduct]
   );
-  const upcomingAuctions = products.filter(
-    (product) => product.status === "upcoming"
-  );
-  const pastAuctions = products.filter((product) => product.status === "past");
+
+  // Filtrar productos con useMemo
+  const filteredProducts = useMemo(() => {
+    return {
+      current: products.filter((product) => product.status === "active"),
+      upcoming: products.filter((product) => product.status === "upcoming"),
+      past: products.filter(
+        (product) => product.status === "past" || product.status === "completed"
+      ),
+    };
+  }, [products]);
 
   const renderAuctionSection = (
     title: string,
@@ -114,7 +126,8 @@ function HomePage() {
               <ProductCard
                 product={product}
                 handleOpenMenu={handleOpenMenu}
-                goToProduct={() => goToProduct(product.id)}
+                goToProduct={handleGoToProduct}
+                isAdmin={isAdmin}
               />
             </Grid>
           ))
@@ -128,14 +141,12 @@ function HomePage() {
 
   return (
     <Box sx={{ py: 4 }}>
-      {/* Header with create product button and tabs */}
       <ProductHeader
         openDialogHandler={isAdmin ? handleCreateProduct : () => {}}
         value={value}
         setValue={setValue}
+        isAdmin={isAdmin}
       />
-
-      {/* Error and loading states */}
       {error && (
         <Typography color="error" sx={{ mb: 2 }}>
           {error}
@@ -151,12 +162,12 @@ function HomePage() {
             <>
               {renderAuctionSection(
                 "Subastas Actuales",
-                currentAuctions,
+                filteredProducts.current,
                 "No current auctions available."
               )}
               {renderAuctionSection(
                 "Subastas Próximas",
-                upcomingAuctions,
+                filteredProducts.upcoming,
                 "No upcoming auctions available."
               )}
             </>
@@ -164,13 +175,11 @@ function HomePage() {
           {value === 1 &&
             renderAuctionSection(
               "Historial de Subastas",
-              pastAuctions,
+              filteredProducts.past,
               "No past auctions available."
             )}
         </>
       )}
-
-      {/* Admin menu and dialog */}
       {isAdmin && selectedProductId && (
         <ProductActionsMenu
           anchorEl={anchorEl}

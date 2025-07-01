@@ -102,7 +102,7 @@
       "startTime": "2025-06-30T11:00:00Z",
       "endTime": "2025-07-01T11:00:00Z",
       "status": "past",
-      "winnerId": "1"
+      "winnerId": null
     },
     {
       "id": "2",
@@ -122,13 +122,13 @@
       "title": "Mesa Antigua de Roble",
       "description": "Mesa de comedor de roble macizo del siglo XIX, con detalles tallados a mano. Ideal para decorar espacios clásicos o como pieza de colección.",
       "image": "https://www.penderynantiques.co.uk/app/uploads/2023/01/M-3300-Early-20th-Century-Antique-Oak-Extendable-Dining-Table-1.jpg",
-      "basePrice": 1500,
-      "currentPrice": 1223333,
+      "basePrice": 100,
+      "currentPrice": 171,
       "duration": 45555,
-      "startTime": "2025-06-30T10:00:00Z",
-      "endTime": "2025-07-01T10:00:00Z",
+      "startTime": "2025-07-01T07:51",
+      "endTime": "2025-07-01T08:00",
       "status": "active",
-      "winnerId": "1"
+      "winnerId": "6"
     },
     {
       "id": "4",
@@ -162,12 +162,12 @@
       "description": "Guitarra eléctrica Fender Stratocaster con acabado personalizado y excelente calidad de sonido. Uso ligero, ideal para músicos exigentes.",
       "image": "https://t3.ftcdn.net/jpg/02/16/35/78/360_F_216357832_E67FUQu5RRRCe9pUb1uefbJJSBK0Wiza.jpg",
       "basePrice": 800,
-      "currentPrice": 900,
-      "duration": 100000,
+      "currentPrice": 9005,
+      "duration": 4000,
       "startTime": "2025-06-30T10:00:00Z",
       "endTime": "2025-07-01T10:00:00Z",
       "status": "active",
-      "winnerId": null
+      "winnerId": "7"
     },
     {
       "id": "8",
@@ -189,70 +189,27 @@
       "image": "https://example.com/arte.jpg",
       "basePrice": 1000,
       "currentPrice": 1100,
-      "duration": 86400,
-      "startTime": "2025-06-29T14:15:00Z",
-      "endTime": "2025-06-30T14:25:00Z",
+      "duration": 11400,
+      "startTime": "2025-07-01T07:51",
+      "endTime": "2025-07-03T07:51",
       "status": "active",
       "winnerId": null
+    },
+    {
+      "id": "19942ec1-755f-4581-986b-d21bf4e9b4c3",
+      "title": "lol",
+      "description": "lol",
+      "image": "",
+      "basePrice": 100,
+      "currentPrice": 100,
+      "duration": 12000,
+      "startTime": "2025-07-01T07:50",
+      "endTime": "2025-07-01T09:50",
+      "status": "active",
+      "winnerId": ""
     }
   ],
   "bids": [
-    {
-      "id": "4",
-      "productId": 2,
-      "userId": 2,
-      "amount": 2100,
-      "timestamp": "2025-06-27T22:20:00Z"
-    },
-    {
-      "id": "5",
-      "productId": 2,
-      "userId": 4,
-      "amount": 2200,
-      "timestamp": "2025-06-27T22:30:00Z"
-    },
-    {
-      "id": "6",
-      "productId": 2,
-      "userId": 2,
-      "amount": 2500,
-      "timestamp": "2025-06-27T23:50:00Z"
-    },
-    {
-      "id": "7",
-      "productId": 5,
-      "userId": 4,
-      "amount": 320,
-      "timestamp": "2025-06-27T20:15:00Z"
-    },
-    {
-      "id": "8",
-      "productId": 5,
-      "userId": 6,
-      "amount": 330,
-      "timestamp": "2025-06-27T20:20:00Z"
-    },
-    {
-      "id": "9",
-      "productId": 5,
-      "userId": 4,
-      "amount": 350,
-      "timestamp": "2025-06-27T20:50:00Z"
-    },
-    {
-      "id": "10",
-      "productId": 7,
-      "userId": 5,
-      "amount": 850,
-      "timestamp": "2025-06-28T01:40:00Z"
-    },
-    {
-      "id": "11",
-      "productId": 7,
-      "userId": 6,
-      "amount": 900,
-      "timestamp": "2025-06-28T01:45:00Z"
-    },
     {
       "id": "de3a",
       "productId": "1",
@@ -345,25 +302,32 @@
       "timestamp": "2025-06-30T16:11:16.734Z"
     },
     {
-      "id": "7632",
-      "productId": "3",
-      "userId": "1",
-      "bid": 231213,
-      "timestamp": "2025-06-30T16:11:16.756Z"
+      "id": "421b",
+      "productId": "7",
+      "userId": "6",
+      "bid": 9004,
+      "timestamp": "2025-07-01T13:21:47.648Z"
     },
     {
-      "id": "6767",
-      "productId": "3",
-      "userId": "1",
-      "bid": 1223333,
-      "timestamp": "2025-06-30T16:11:29.253Z"
+      "id": "48db",
+      "productId": "7",
+      "userId": "6",
+      "bid": 9004,
+      "timestamp": "2025-07-01T13:21:47.673Z"
     },
     {
-      "id": "bf04",
-      "productId": "3",
-      "userId": "1",
-      "bid": 1223333,
-      "timestamp": "2025-06-30T16:11:29.266Z"
+      "id": "1bc4",
+      "productId": "7",
+      "userId": "7",
+      "bid": 9005,
+      "timestamp": "2025-07-01T13:21:56.198Z"
+    },
+    {
+      "id": "cc55",
+      "productId": "7",
+      "userId": "7",
+      "bid": 9005,
+      "timestamp": "2025-07-01T13:21:56.221Z"
     }
   ],
   "chatMessages": [

@@ -1,10 +1,4 @@
-import {
-  useRef,
-  useState,
-  useCallback,
-  useContext,
-  createContext,
-} from "react";
+import { useRef, useState, useCallback, createContext } from "react";
 import { useUsers } from "../hooks/useUser";
 import UserFormDialog from "../components/UserFormDialog";
 import {
@@ -23,6 +17,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import type { User } from "../interfaces/userInterface";
 import { useEffect } from "react";
+import { useUser } from "../contexts/UserContextHelper";
 
 // Simulated Auth Context (replace with your actual auth solution)
 const AuthContext = createContext<{ user?: User }>({ user: undefined });
@@ -31,7 +26,7 @@ function AdminPanel() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const { user } = useContext(AuthContext);
+  const { user } = useUser();
   const isAdmin = user?.role === "admin";
 
   const {

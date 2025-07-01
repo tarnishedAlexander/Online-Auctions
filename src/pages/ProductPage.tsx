@@ -15,6 +15,9 @@ import BidForm from "../components/BidForm";
 import BidHistory from "../components/BidHistory";
 import BidChart from "../components/BidChart";
 
+// Suponiendo que tienes un hook o contexto para obtener el usuario actual
+import { useUser } from "../contexts/UserContextHelper"; // Ejemplo, ajusta según tu implementación
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "#fff",
   ...theme.typography.body2,
@@ -44,12 +47,14 @@ function ProductPage() {
   );
   const { fetchProduct } = useProductsStore();
   const eventSourceRef = useRef<EventSource | null>(null);
+  const { user } = useUser();
 
   useEffect(() => {
     const loadProduct = async () => {
       if (productId) {
         const fetchedProduct = await fetchProduct(productId);
         if (fetchedProduct) {
+          console.log("Fetched product:", fetchedProduct);
           setProduct(fetchedProduct);
         }
         const bidsResponse = await fetch(
@@ -111,10 +116,11 @@ function ProductPage() {
 
   const getUserName = (userId: string) => {
     const user = users.find((u) => u.id === userId);
+    console.log("getUserName called with userId:", userId, "found user:", user);
     return user ? user.username : `Usuario ${userId}`;
   };
 
-  if (!product) {
+  if (!product || !user) {
     return <div>Loading...</div>;
   }
 
@@ -153,8 +159,8 @@ function ProductPage() {
             >
               <ProductDetails
                 product={product}
-                bids={bids}
                 getUserName={getUserName}
+                user={user}
               />
               {product.status === "active" && (
                 <BidForm
@@ -164,6 +170,8 @@ function ProductPage() {
                   setAlertSeverity={setAlertSeverity}
                   setAlertOpen={setAlertOpen}
                   setBids={setBids}
+                  getUserName={getUserName}
+                  user={user}
                 />
               )}
               {(product.status === "active" || product.status === "past") &&

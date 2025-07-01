@@ -6,19 +6,19 @@ import TimerDisplay from "./TimerDisplay";
 
 interface ProductDetailsProps {
   product: Product;
-  bids: { userId: string; bid: number; timestamp: string }[];
   getUserName: (userId: string) => string;
   onTimerEnd?: () => Promise<void>;
+  user?: { id: string; username: string }; // Ajustamos el tipo para que coincida con la interfaz User
 }
 
 function ProductDetails({
   product,
   getUserName,
   onTimerEnd,
+  user,
 }: ProductDetailsProps) {
   const [timeUntilStart, setTimeUntilStart] = useState<string | null>(null);
 
-  // Countdown for "upcoming" products
   useEffect(() => {
     if (product.status !== "upcoming" || !product.startTime) {
       setTimeUntilStart(null);
@@ -41,7 +41,7 @@ function ProductDetails({
       }
     };
 
-    updateStartTimer(); // Initial call
+    updateStartTimer();
     const interval = setInterval(updateStartTimer, 1000);
 
     return () => clearInterval(interval);
@@ -65,29 +65,30 @@ function ProductDetails({
             startTime={product.startTime}
             duration={product.duration}
             status={product.status}
-            onTimerEnd={onTimerEnd} // Pass onTimerEnd to TimerDisplay
+            onTimerEnd={onTimerEnd}
           />
           <Typography
             variant="body2"
             color="text.secondary"
             sx={{ mt: 2, mb: 1 }}
           >
-            Auction ends: {endTime}
+            Subasta termina a: {endTime}
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-            This auction is {product.status}.
+            Esta subasta está {product.status}.
           </Typography>
           <Typography variant="body2" sx={{ fontWeight: "bold", mb: 1 }}>
-            Minimum bid for this auction is ${product.basePrice.toFixed(2)}
+            La mínima puja para esta subasta es ${product.basePrice.toFixed(2)}
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-            Current bid: ${product.currentPrice.toFixed(2)}
+            Puja actual: ${product.currentPrice.toFixed(2)}
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-            Winner ID: {product.winnerId || "None"}
+            Ganador actual:{" "}
+            {product.winnerId ? getUserName(product.winnerId) : "Ninguno"}
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-            Description: {product.description}
+            Descripción: {product.description}
           </Typography>
         </Box>
       )}
@@ -98,15 +99,20 @@ function ProductDetails({
           </Typography>
           {timeUntilStart && (
             <Typography variant="body2" sx={{ mb: 1 }}>
-              Time until start: {timeUntilStart}
+              Tiempo hasta el inicio: {timeUntilStart}
             </Typography>
           )}
           <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-            Description: {product.description}
+            Descripción: {product.description}
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-            This auction is upcoming and will start on {startTime}.
+            Esta subasta está próxima a comenzar el {startTime}.
           </Typography>
+          {user && (
+            <Typography variant="body2" sx={{ fontWeight: "bold", mb: 1 }}>
+              Usuario actual: {getUserName(user.id)}
+            </Typography>
+          )}
         </Box>
       )}
       {product.status === "past" && (
@@ -115,17 +121,22 @@ function ProductDetails({
             {product.title}
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-            Description: {product.description}
+            Descripción: {product.description}
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-            Sold for: ${product.currentPrice.toFixed(2)}
+            Vendido por: ${product.currentPrice.toFixed(2)}
           </Typography>
           <Typography variant="body2" sx={{ fontWeight: "bold", mb: 1 }}>
-            Winner: {getUserName(product.winnerId || "Not available")}
+            Ganador: {getUserName(product.winnerId || "No disponible")}
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-            Sale date: {endTime}
+            Fecha de venta: {endTime}
           </Typography>
+          {user && (
+            <Typography variant="body2" sx={{ fontWeight: "bold", mb: 1 }}>
+              Usuario actual: {getUserName(user.id)}
+            </Typography>
+          )}
         </Box>
       )}
     </>

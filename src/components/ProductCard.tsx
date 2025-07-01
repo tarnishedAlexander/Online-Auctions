@@ -20,12 +20,14 @@ interface ProductCardProps {
     productId: string
   ) => void;
   goToProduct: (productId: string) => void;
+  isAdmin: boolean;
 }
 
 function ProductCard({
   product,
   handleOpenMenu,
   goToProduct,
+  isAdmin,
 }: ProductCardProps) {
   return (
     <Grid size={{ xs: 12 }}>
@@ -39,20 +41,21 @@ function ProductCard({
         }}
       >
         <Box position="relative">
-          <IconButton
-            onClick={(event) => handleOpenMenu(event, product.id)}
-            size="small"
-            sx={{
-              position: "absolute",
-              top: 8,
-              right: 8,
-              backgroundColor: "rgba(255, 255, 255, 0.7)",
-              zIndex: 1,
-            }}
-          >
-            <MoreVertIcon fontSize="small" />
-          </IconButton>
-
+          {isAdmin && (
+            <IconButton
+              onClick={(event) => handleOpenMenu(event, product.id)}
+              size="small"
+              sx={{
+                position: "absolute",
+                top: 8,
+                right: 8,
+                backgroundColor: "rgba(255, 255, 255, 0.7)",
+                zIndex: 1,
+              }}
+            >
+              <MoreVertIcon fontSize="small" />
+            </IconButton>
+          )}
           <CardMedia
             sx={{ height: 200 }}
             image={product.image || "https://picsum.photos/200/300"}

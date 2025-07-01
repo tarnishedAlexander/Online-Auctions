@@ -39,7 +39,9 @@ app.post("/bid/:productId", async (req, res) => {
     }
 
     if (bid <= currentProduct.currentPrice || bid < 0 || bid > 10000000) {
+      console.error("Puja inválida:", bid, "para el producto:", productId);
       return res.status(400).json({ error: "Puja inválida" });
+
     }
 
     const updatedProduct = {

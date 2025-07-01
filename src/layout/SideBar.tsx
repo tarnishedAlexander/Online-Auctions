@@ -1,3 +1,4 @@
+import { useUser } from "../contexts/UserContextHelper"; // Updated import
 import {
   Divider,
   Drawer,
@@ -11,7 +12,6 @@ import {
 import { Info } from "@mui/icons-material";
 import { Link, useLocation } from "react-router-dom";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
-// import { useUser } from "../contexts/UserContext";
 
 const drawerWidth = 240;
 
@@ -27,7 +27,9 @@ const Sidebar = ({
   isMobile,
 }: SidebarProps) => {
   const location = useLocation();
-  // const { logout } = useUser();
+  const { user } = useUser();
+  const isAdmin = user?.role === "admin";
+
   const drawer = (
     <div>
       <Toolbar />
@@ -46,25 +48,26 @@ const Sidebar = ({
           </ListItemButton>
         </ListItem>
 
-        <ListItem disablePadding>
-          <ListItemButton
-            component={Link}
-            to="/app/adminPanel"
-            selected={location.pathname === "/app/adminPanel"}
-          >
-            <ListItemIcon>
-              <BusinessCenterIcon />
-            </ListItemIcon>
-            <ListItemText primary="Admin panel" />
-          </ListItemButton>
-        </ListItem>
+        {isAdmin && (
+          <ListItem disablePadding>
+            <ListItemButton
+              component={Link}
+              to="/app/adminPanel"
+              selected={location.pathname === "/app/adminPanel"}
+            >
+              <ListItemIcon>
+                <BusinessCenterIcon />
+              </ListItemIcon>
+              <ListItemText primary="Admin panel" />
+            </ListItemButton>
+          </ListItem>
+        )}
 
         <ListItem disablePadding>
           <ListItemButton
             component={Link}
             to="/login"
             selected={location.pathname === "/login"}
-            //onClick={logout}
           >
             <ListItemIcon>
               <Info />
@@ -75,6 +78,7 @@ const Sidebar = ({
       </List>
     </div>
   );
+
   return (
     <>
       {isMobile && (

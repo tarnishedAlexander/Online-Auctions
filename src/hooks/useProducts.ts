@@ -1,90 +1,134 @@
-import { useEffect, useState } from "react";
-import { useProductsStore } from "../store/useProductsStore";
+// hooks/useProducts.ts
+import { useState, useEffect } from "react";
 import { useFormik } from "formik";
-import type { Product } from "../interfaces/productInterface";
-import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
+import {
+  getAllProducts,
+  createProduct,
+  editProduct,
+  deleteProduct,
+  placeBid,
+} from "../services/productService";
+import type { Product } from "../interfaces/productInterface";
 
 export const useProducts = () => {
-  const navigate = useNavigate();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [openDialog, setOpenDialog] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const { products, isLoading, error, fetchProducts, createProduct, editProduct, deleteProduct, fetchProduct } = useProductsStore();
+  const navigate = useNavigate();
 
   useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const data = await getAllProducts();
+        setProducts(data);
+        setIsLoading(false);
+      } catch (err) {
+        console.error("Error fetching products:", err);
+        setError("Failed to load products");
+        setIsLoading(false);
+      }
+    };
     fetchProducts();
-  }, [fetchProducts]);
+  }, []);
 
-  
   const formik = useFormik({
-    initialValues: selectedProduct
-      ? { ...selectedProduct, currentPrice: selectedProduct.currentPrice || selectedProduct.basePrice }
-      : {
-          id: "",
-          title: "",
-          description: "",
-          image: "",
-          basePrice: 0,
-          currentPrice: 0,
-          duration: 0,
-          startTime: "",
-          endTime: "",
-          status: "active" as const,
-          winnerId: undefined,
-        },
-    enableReinitialize: true,
+    initialValues: {
+      id: "",
+      title: "",
+      description: "",
+      image: "",
+      basePrice: 0,
+      currentPrice: 0,
+      duration: 0,
+      startTime: "",
+      endTime: "",
+      status: "upcoming" as Product["status"],
+      winnerId: "",
+    },
     validationSchema: Yup.object({
       title: Yup.string().required("Required"),
       description: Yup.string().required("Required"),
-      basePrice: Yup.number().required("Required").positive().max(1000000),
-      image: Yup.string().optional(),
-      currentPrice: Yup.number().required("Required").positive().max(1000000),
-      duration: Yup.number().required("Required").positive().max(1000000),
-      startTime: Yup.string().required("Required"),
-      endTime: Yup.string().required("Required"),
-      status: Yup.string().required("Required").oneOf(["active", "upcoming", "past"]),
-      winnerId: Yup.string().optional(),
+      basePrice: Yup.number().min(0, "Must be positive").required("Required"),
+      duration: Yup.number().min(1, "Must be at least 1 second").required("Required"),
     }),
-    onSubmit: async (values, { setSubmitting }) => {
+    onSubmit: async (values, { resetForm }) => {
       try {
-        if (selectedProduct?.id) {
-          await editProduct({ ...values, id: selectedProduct.id });
+        if (values.id) {
+          await editProduct(values);
+          setProducts((prev) =>
+            prev.map((p) => (p.id === values.id ? values : p))
+          );
         } else {
-          const newProduct = { ...values, id: values.id || crypto.randomUUID() };
-          await createProduct(newProduct);
+          const newProduct = await createProduct({
+            ...values,
+            id: crypto.randomUUID(),
+            currentPrice: values.basePrice,
+          });
+          setProducts((prev) => [...prev, newProduct]);
         }
-        formik.resetForm();
-        setSelectedProduct(null);
+        resetForm();
         setOpenDialog(false);
-        navigate("/app/home");
-      } catch (error) {
-        console.error("Error saving product:", error);
-      } finally {
-        setSubmitting(false);
+      } catch (err) {
+        console.error("Error saving product:", err);
+        setError("Failed to save product");
       }
     },
   });
 
-  const editProductHandler = (product: Product) => {
-    setSelectedProduct(product);
-    setOpenDialog(true);
-  };
-
   const openDialogHandler = () => {
-    formik.resetForm();
-    setSelectedProduct(null);
     setOpenDialog(true);
   };
 
   const closeDialogHandler = () => {
-    formik.resetForm();
-    setSelectedProduct(null);
     setOpenDialog(false);
+    formik.resetForm();
+  };
+
+  const editProductHandler = (product: Product) => {
+    formik.setValues({
+      ...product,
+      startTime: product.startTime ?? "",
+      endTime: product.endTime ?? "",
+      winnerId: product.winnerId ?? "",
+      image: product.image ?? "",
+      description: product.description ?? "",
+      title: product.title ?? "",
+      status: product.status ?? "upcoming",
+      id: product.id ?? "",
+      basePrice: product.basePrice ?? 0,
+      currentPrice: product.currentPrice ?? 0,
+      duration: product.duration ?? 0,
+    });
+    setOpenDialog(true);
+  };
+
+  const deleteProductHandler = async (id: string) => {
+    try {
+      await deleteProduct(id);
+      setProducts((prev) => prev.filter((p) => p.id !== id));
+    } catch (err) {
+      console.error("Error deleting product:", err);
+      setError("Failed to delete product");
+    }
   };
 
   const goToProduct = (productId: string) => {
-    console.log("Navigating to:", `/app/home/products/${productId}`);
     navigate(`/app/home/products/${productId}`);
+  };
+
+  const handleBid = async (productId: string, amount: number, userId: string) => {
+    try {
+      const updatedProduct = await placeBid(productId, amount, userId);
+      setProducts((prev) =>
+        prev.map((p) => (p.id === productId ? updatedProduct : p))
+      );
+    } catch (err) {
+      console.error("Error placing bid:", err);
+      setError("Failed to place bid");
+    }
   };
 
   return {
@@ -93,12 +137,11 @@ export const useProducts = () => {
     error,
     formik,
     editProductHandler,
-    goToProduct,
-    deleteProduct,
-    fetchProduct,
+    deleteProduct: deleteProductHandler,
     openDialog,
     openDialogHandler,
     closeDialogHandler,
+    goToProduct,
+    handleBid,
   };
 };
-

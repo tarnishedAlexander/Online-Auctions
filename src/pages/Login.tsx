@@ -17,7 +17,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { loginUser } from "../services/authService";
 import type { User } from "../interfaces/userInterface";
-import { useAuthStore } from "../store/authStore";
+import { useUser } from "../contexts/UserContextHelper"; // Cambia a useUser
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -62,10 +62,10 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
 }));
 
 export default function SignIn() {
-  const { login } = useAuthStore();
+  const { login } = useUser();
   const navigate = useNavigate();
-  const [open, setOpen] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
+  const [forceError, setForceError] = React.useState<boolean>(false);
 
   const formik = useFormik({
     initialValues: {
@@ -108,13 +108,11 @@ export default function SignIn() {
     },
   });
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleFacebookClick = () => {
+    setForceError(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const badObject: any = null;
 
   return (
     <>
@@ -128,6 +126,7 @@ export default function SignIn() {
           >
             Sign in
           </Typography>
+          {forceError && badObject.someProperty}{" "}
           <Box
             component="form"
             onSubmit={formik.handleSubmit}
@@ -178,6 +177,11 @@ export default function SignIn() {
                 helperText={formik.touched.password && formik.errors.password}
               />
             </FormControl>
+            {error && (
+              <Typography color="error" sx={{ textAlign: "center" }}>
+                {error}
+              </Typography>
+            )}
             <Button
               type="submit"
               fullWidth
@@ -189,7 +193,6 @@ export default function SignIn() {
             <Link
               component="button"
               type="button"
-              onClick={handleClickOpen}
               variant="body2"
               sx={{ alignSelf: "center" }}
             >
@@ -201,7 +204,7 @@ export default function SignIn() {
             <Button
               fullWidth
               variant="outlined"
-              onClick={() => alert("Sign in with Google")}
+              onClick={handleFacebookClick}
               startIcon={<GoogleIcon />}
             >
               Sign in with Google
@@ -209,7 +212,7 @@ export default function SignIn() {
             <Button
               fullWidth
               variant="outlined"
-              onClick={() => alert("Sign in with Facebook")}
+              onClick={handleFacebookClick}
               startIcon={<FacebookIcon />}
             >
               Sign in with Facebook

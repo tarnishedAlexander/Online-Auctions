@@ -12,15 +12,15 @@ interface ProductHeaderProps {
   openDialogHandler: () => void;
   value: number;
   setValue: (value: number) => void;
+  isAdmin: boolean; // Add isAdmin prop
 }
 
 function ProductHeader({
   openDialogHandler,
   value,
   setValue,
+  isAdmin,
 }: ProductHeaderProps) {
-  const isAdmin = true;
-
   return (
     <Box
       display="flex"
